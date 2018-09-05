@@ -1,0 +1,340 @@
+#CUSTOMHEADER###################################################################
+<script type="text/javascript" src="js/scorm.1.2.validator.js"></script>
+<script type="text/javascript" src="js/scorm.1.2.adapter.js"></script>
+<script>
+
+function setup()
+{
+
+}
+
+function movePrevSlide()
+{
+  var url = '<?url(,move=prev)?>';
+  location.assign(url);
+}
+
+function moveNextSlide()
+{
+  var url = '<?url(,move=next)?>';
+  location.assign(url);
+}
+
+function selectSlide(key)
+{
+  var url = '<?url(,x=y)?>&SLIDE_ID=' + key;
+  location.assign(url);
+}
+
+function repeatCourse()
+{
+  if (typeof(API) !== 'undefined')
+    API.LMSFinish();
+  var url = '<?url(,resetlesson=y)?>';
+  location.assign(url);
+}
+
+function clearCourse()
+{
+  if (!confirm('Загрузить новый курс?'))
+    return;
+  
+  if (typeof(API) !== 'undefined')
+    API.LMSFinish();
+  
+  var url = '<?url(,clearlesson=y)?>';
+  location.assign(url);
+}
+
+function goFullScreen()
+{
+  element = document.getElementById("SCO");
+  if(element.requestFullScreen) 
+  {
+    element.requestFullScreen();
+  } 
+  else if(element.mozRequestFullScreen) 
+  {
+    element.mozRequestFullScreen();
+  } 
+  else if(element.webkitRequestFullScreen) 
+  {
+    element.webkitRequestFullScreen();
+  }
+}
+</script>
+<style>
+
+#imageHeader {display:none}
+#SCO 
+{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  height: calc(100% - 200px);
+}
+
+.dtree a.nodeSel {
+  background-color: #337ab7; /* BOOTSTRAP LIST-GROUP-ITEM.ACTIVE BACKGROUND */
+  color:white;               /* BOOTSTRAP LIST-GROUP-ITEM.ACTIVE COLOR */
+  border-color: #337ab7;     /* BOOTSTRAP LIST-GROUP-ITEM.ACTIVE BORDER */
+  border-radius:2px;
+  padding-left:4px;
+  padding-right:4px;
+}
+
+#DataOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#LoadingAnimation
+{
+  display: none;
+}
+#LoadingAnimation  #DataLoader
+{
+  display: block;
+}
+#LoadingAnimation  #DataOverlay
+{
+  display: block;
+}
+
+</style>
+
+<script>
+
+function ShowLoading()
+{
+  $('#LoadingAnimation').show();
+}
+function HideLoading()
+{
+  $('#LoadingAnimation').hide();
+}
+</script>
+#CONTENT########################################################################
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button title="Показать меню" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only">Показать меню</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="container" style="margin-right:10px">
+    <div id="navbar2" class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <? if (CAN_MOVE_PREV) THEN [CAN_MOVE_PREV] else [CAN_NOT_MOVE_PREV] ?>
+        <? if (CAN_MOVE_NEXT) THEN [CAN_MOVE_NEXT] else [CAN_NOT_MOVE_NEXT] ?>
+        <? if (CAN_SELECT) THEN [CAN_SELECT] else [CAN_NOT_SELECT] ?>
+        <li><a href="javascript:void(0)" onclick="repeatCourse()"><i class="glyphicon glyphicon-repeat"></i> Начать сначала</a></li>
+        <li><a href="javascript:void(0)" onclick="clearCourse()"><i class="glyphicon glyphicon-upload"></i> Загрузить новый курс</a></li>
+        <li><a href="javascript:void(0)" data-toggle="modal" data-target="#metaInfoDialog"><i class="glyphicon glyphicon-info-sign"></i> Инфо</a></li>
+        <li><a href="javascript:void(0)" onclick="goFullScreen()"><i class="glyphicon glyphicon-fullscreen"></i> Во весь экран</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<?BREADCRUMBS?>
+<iframe src="<?PAGE_TO_GO?>" id="SCO" name="SCO" seamless="1" frameborder="0"></iframe>  
+<div class="modal fade" id="selectSlideDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4>Выберите раздел</h4>
+      </div>
+      <div class="modal-body">
+         <?COURSETREE?>      
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="metaInfoDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4>Информация о курсе</h4>
+      </div>
+      <div class="modal-body">
+        <dl>
+          <dt>Версия SCORM</dt>
+          <dd><?schemaversion?></dd>
+          <dt>Идентификатор</dt>
+          <dd><?identifier?></dd>
+          <dt>Название курса</dt>
+          <dd><?title?></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var API = new LMSAPI('API', '<?SESSION_ID?>', true, '<?url()?>');
+  /// var API_1484_11 = API; No support for SCORM 2004 right now
+</script>
+
+
+#CAN_MOVE_PREV####################################################
+        <li><a href="javascript:void(0)" onclick="movePrevSlide()"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+#CAN_NOT_MOVE_PREV################################################
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+#CAN_MOVE_NEXT####################################################
+        <li><a href="javascript:void(0)" onclick="moveNextSlide()"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+#CAN_NOT_MOVE_NEXT################################################
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+#CAN_SELECT#######################################################
+        <li><a href="javascript:void(0)" data-toggle="modal" data-target="#selectSlideDialog"><i class="glyphicon glyphicon-th-list"></i> Перейти</a></li>
+#CAN_NOT_SELECT###################################################
+        <li  class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-th-list"></i> Перейти</a></li>
+#COURSETREE_BEGIN#################################################
+<div class=dtree>
+#COURSETREE_ROOT##################################################
+<div class="clip"> <span class="<?nodeclass?>"><h4><?name?></h4></span></div>
+#COURSETREE_ITEM##################################################
+  <?if (href) then [CLICKABLE_ITEM] else [NON_CLICKABLE_ITEM]?>
+#CLICKABLE_ITEM####################################################  
+<div class="clip"><?nodeoutline?><?nodeicon?><img src="<?imagePath?>/page.gif"><a class="<?nodeclass?>" 
+  href="javascript:void(0)" onclick="selectSlide('<?key?>')"><?name?></a></div>
+#NON_CLICKABLE_ITEM##############################################
+<div class="clip"><?nodeoutline?><?nodeicon?><img src="<?imagePath?>/folder.gif"><?name?></div>
+#COURSETREE_END###################################################
+</div>
+#COURSETREE_EMPTY#################################################
+
+#CONTENT_CLOSED#####################################################################
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button title="Показать меню" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only">Показать меню</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="container" style="margin-right:10px">
+    <div id="navbar2" class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <?[CAN_NOT_MOVE_PREV]?>
+        <?[CAN_NOT_MOVE_NEXT]?>
+        <?[CAN_NOT_SELECT]?>
+        <li><a href="javascript:void(0)" onclick="repeatCourse()"><i class="glyphicon glyphicon-repeat"></i> Начать сначала</a></li>
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-info-sign"></i> Инфо</a></li>
+        <li><a href="javascript:void(0)" onclick="clearCourse()"><i class="glyphicon glyphicon-upload"></i> Загрузить новый курс</a></li>
+        <li class="disabled"><a href="javascript:void(0)" ><i class="glyphicon glyphicon-fullscreen"></i> Во весь экран</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<?BREADCRUMBS?>
+<div class="container">
+  <div class="jumbotron">
+    <h1>
+      Завершено!
+    </h1>
+    <small>
+      Задание "<?COURSE_NAME?>" выполнено
+    </small>
+  <p class="text-center">
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="repeatCourse()">
+        <i class="glyphicon glyphicon-repeat"></i> Начать сначала
+      </button>
+    </div>    
+  </p>
+
+  </div>
+</div>
+
+#CONTENT_NOT_SELECTED#############################################################
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button title="Показать меню" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only">Показать меню</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="container" style="margin-right:10px">
+    <div id="navbar2" class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <?[CAN_NOT_MOVE_PREV]?>
+        <?[CAN_NOT_MOVE_NEXT]?>
+        <?[CAN_NOT_SELECT]?>
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-repeat"></i> Начать сначала</a></li>
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-info-sign"></i> Инфо</a></li>
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-upload"></i> Загрузить новый курс</a></li>
+        <li class="disabled"><a href="javascript:void(0)"><i class="glyphicon glyphicon-fullscreen"></i> Во весь экран</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<?BREADCRUMBS?>
+<form name="upload" method="post" action="<?THIS?>" enctype="multipart/form-data">
+  <input type="hidden" name="action" value="upload">
+  <div class="container">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">Загрузка курса</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+        </div>      
+        <label>Выберите ZIP-файл с загружаемым пакетом:
+         <div class="input-group">
+           <span class="input-group-addon"><i class="glyphicon glyphicon-compressed"></i></span>
+           <input type="file" class="form-control" name="upload">
+           <span class="input-group-addon">.zip</span>
+         </div>    
+        </label>
+      </div>  
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" onclick="startUpload()">
+          Загрузить
+        </button>
+      </div>    
+    </div>
+  </div>
+</form>
+<script>
+function startUpload()
+{
+  ShowLoading()
+  document.forms['upload'].submit();
+}
+</script>
+
+<div id="LoadingAnimation">
+<div id="DataOverlay"></div>
+<div class="loader" data-initialize="loader" id="DataLoader"></div>
+</div>
+
+#END############################################################################
+      <div class="panel-body">
+        <div class="form-group">
+            <label>Выберите ZIP-файл с загружаемым пакетом
+              <input type="file" class="form-control" name="upload">
+            </label>
+        </div>      
+      </div>  
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" onclick="startUpload()">
+        Загрузить
+        </button>
+      </div>    
