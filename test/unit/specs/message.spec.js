@@ -11,7 +11,8 @@ describe('message.vue', () => {
 
   it('Accept message property', () => {
     const wrapper = shallowMount(Message)
-    const element = wrapper.find('v-snackbar-stub')
+    const element = wrapper.find('vsnackbar-stub')
+
     wrapper.setProps({ message })
     expect(element.html()).toContain(message)
   })
@@ -19,7 +20,7 @@ describe('message.vue', () => {
   it('Accept level property', () => {
     const wrapper = shallowMount(Message)
     wrapper.setProps({ level: 'error' })
-    const element = wrapper.find('v-snackbar-stub')
+    const element = wrapper.find('vsnackbar-stub')
     expect(element.attributes().color).toBe('error')
     wrapper.setProps({ level: '' })
     expect(element.attributes().color).toBe('info')
@@ -28,7 +29,7 @@ describe('message.vue', () => {
   it('Accept timeout property', () => {
     const wrapper = shallowMount(Message)
     wrapper.setProps({ timeout: 10000 })
-    const element = wrapper.find('v-snackbar-stub')
+    const element = wrapper.find('vsnackbar-stub')
     expect(element.attributes().timeout).toBe('10000')
   })
   /*
@@ -55,7 +56,7 @@ describe('message.vue', () => {
   it('should close on button click', () => {
     const wrapper = shallowMount(Message)
     wrapper.setProps({ message: message })
-    wrapper.find('v-btn-stub').trigger('click')
+    wrapper.find('vbtn-stub').trigger('click')
     expect(wrapper.vm.$vnode.componentInstance.gotMessage).toBeFalsy()
   })
 

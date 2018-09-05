@@ -7,9 +7,9 @@ import spinner from '@/components/app/spinner'
 describe('loading-spinner.vue', () => {
   const wrapper = shallowMount(spinner)
   it('should render correct contents', () => {
-    expect(wrapper.html()).toContain('v-progress-circular-stub')
+    expect(wrapper.html()).toContain('vprogresscircular-stub')
     const div = wrapper.find('.spinner-control')
-    expect(div.html()).toContain('v-progress-circular-stub')
+    expect(div.html()).toContain('vprogresscircular-stub')
     expect(div.attributes().style).toBe('display: none;')
   })
   it('should show when :loading is true', () => {
@@ -33,19 +33,4 @@ describe('loading-spinner.vue', () => {
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 10);
     jest.runAllTimers()
   })
-
-  /*
-  it('should hide after timeout', () => {
-    wrapper.setProps({ active: true, timeout: 10 })
-    const div = wrapper.find('.spinner-control')
-    expect(div.attributes().style).toBe('')
-    console.log(div.html())
-    setTimeout(() => {
-      console.log(div.html())
-      expect(div.attributes().style).toBe('display: none;')
-    }, 12)
-    jest.runAllTimers()
-  })
-  */
-
 })

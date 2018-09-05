@@ -55,7 +55,7 @@ describe('App.vue', () => {
     try {
       await Api.get('users')
     } catch(error) {
-      console.log(error)
+      // console.log(error)
     }
 
     expect(startSpinner).toHaveBeenCalledTimes(2)
@@ -63,8 +63,5 @@ describe('App.vue', () => {
     expect(raiseError).toHaveBeenCalledTimes(1)
     expect(raiseError).toHaveBeenCalledWith(101)
 
-    // console.log(wrapper.html())
-    // expect(wrapper.html()).toContain('Switch drawer (click me)')
-    //expect(WRAF).toBe(0)
   })
 })
