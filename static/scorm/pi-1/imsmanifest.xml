@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<manifest identifier="BBT_TEST_3197" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="BBT_TEST_3197org">
+    <organization identifier="BBT_TEST_3197org">
+      <title>Число Пи</title>
+      <item identifier="BBT_TEST_3197item" isvisible="true" identifierref="BBT_TEST_3197html" parameters="?open=module.xml">
+        <title>Число Пи</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="BBT_TEST_3197html" href="start.html" type="webcontent" adlcp:scormtype="sco">
+      <file href="adlcp_rootv1p2.xsd"/>
+      <file href="css\bootstrap.min.css"/>
+      <file href="css\main.css"/>
+      <file href="css\material-kit.css"/>
+      <file href="css\tpl\accent.gif"/>
+      <file href="css\tpl\apply.gif"/>
+      <file href="css\tpl\bbt_report_footer.jpg"/>
+      <file href="css\tpl\bbt_report_header.jpg"/>
+      <file href="css\tpl\block_accent_o.gif"/>
+      <file href="css\tpl\block_accent_o_old.gif"/>
+      <file href="css\tpl\block_line_b.gif"/>
+      <file href="css\tpl\block_line_o.gif"/>
+      <file href="css\tpl\block_question_b.gif"/>
+      <file href="css\tpl\block_question_b_old.gif"/>
+      <file href="css\tpl\bullet.gif"/>
+      <file href="css\tpl\del.gif"/>
+      <file href="css\tpl\del16.gif"/>
+      <file href="css\tpl\delete.gif"/>
+      <file href="css\tpl\marker_1.gif"/>
+      <file href="css\tpl\question.gif"/>
+      <file href="css\tpl\video.jpg"/>
+      <file href="fonts\glyphicons-halflings-regular.eot"/>
+      <file href="fonts\glyphicons-halflings-regular.svg"/>
+      <file href="fonts\glyphicons-halflings-regular.ttf"/>
+      <file href="fonts\glyphicons-halflings-regular.woff"/>
+      <file href="fonts\glyphicons-halflings-regular.woff2"/>
+      <file href="goodbye.html"/>
+      <file href="imscp_rootv1p1p2.xsd"/>
+      <file href="imsmd_rootv1p2p1.xsd"/>
+      <file href="ims_xml.xsd"/>
+      <file href="js\bootstrap.min.js"/>
+      <file href="js\jquery-1.11.3.min.js"/>
+      <file href="js\lz-string.min.js"/>
+      <file href="js\material.min.js"/>
+      <file href="js\module.js"/>
+      <file href="js\SCORM_API_wrapper.js"/>
+      <file href="start.html"/>
+      <file href="slides\q41501.html"/>
+    </resource>
+  </resources>
+</manifest>

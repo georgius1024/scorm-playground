@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <title>Отладочный тест - не удалять!!!</title>
+  <config>
+    <master_objective>score</master_objective>
+    <master_rate>50</master_rate>
+  </config>
+  <meta>
+    <OBJECT_TYPE>1</OBJECT_TYPE>
+    <OBJECT_ID>2329</OBJECT_ID>
+    <AUTHOR>Юрий Тимофеев</AUTHOR>
+    <VERSION>1.2 от  12.05.2014</VERSION>
+  </meta>
+  <section id="BBT-1-2329" type="singleton">
+    <title>Отладочный тест - не удалять!!!</title>
+    <content id="BBT-1-2329" objective_id="BBT.1.2329" type="test">
+      <title>Отладочный тест - не удалять!!!</title>
+      <config>
+        <skip_questions>1</skip_questions>
+        <size_limit></size_limit>
+        <hints>0</hints>
+        <shuffle>1</shuffle>
+        <add_to_global_score>1</add_to_global_score>
+        <master_rate>50</master_rate>
+        <attempts>1</attempts>
+        <time_limit>120</time_limit>
+        <show_report>errors</show_report>
+        <immediate_response_when_correct>1</immediate_response_when_correct>
+        <immediate_response_when_wrong>1</immediate_response_when_wrong>
+      </config>
+      <testsection id="BBT-37-22448" objective_id="BBT.37.22448" type="">
+        <title>История</title>
+        <testquestion id="BBT-3-30637" type="" hint_href="slides\h30637.html">
+          <title><![CDATA[Сколько лет длилась столетняя война?]]></title>
+          <answer>1) 116</answer>
+          <answer>2) 100</answer>
+          <answer>3) 78</answer>
+          <answer>4) 92</answer>
+          <mask>0</mask>
+        </testquestion>
+        <testquestion id="BBT-3-30638" type="" hint_href="slides\h30638.html">
+          <title><![CDATA[В каком месяце отмечается Октябрьская революция?]]></title>
+          <answer>1) январь </answer>
+          <answer>2) ноябрь </answer>
+          <answer>3) октябрь</answer>
+          <answer>4) ни одно из перечисленых</answer>
+          <mask>1</mask>
+        </testquestion>
+      </testsection>
+      <testsection id="BBT-37-22449" objective_id="BBT.37.22449" type="">
+        <title>География</title>
+        <testquestion id="BBT-3-30639" type="" hint_href="slides\h30639.html">
+          <title><![CDATA[В какой стране изобрели панамы?]]></title>
+          <answer>1) Эквадор </answer>
+          <answer>2) Италия </answer>
+          <answer>3) Панама</answer>
+          <answer>4) Новая Гвинея</answer>
+          <answer>5) Гаити</answer>
+          <mask>0</mask>
+        </testquestion>
+        <testquestion id="BBT-3-30640" type="" hint_href="slides\h30640.html">
+          <title><![CDATA[От какого животного произошло название Канарских островов?]]></title>
+          <answer>1) Канарейки </answer>
+          <answer>2) Собаки </answer>
+          <answer>3) Тюлени</answer>
+          <answer>4) Ни одно из перечисленных</answer>
+          <mask>1</mask>
+        </testquestion>
+      </testsection>
+    </content>
+  </section>
+</module>

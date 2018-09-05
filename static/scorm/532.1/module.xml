@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <title>проверка</title>
+  <config>
+    <master_objective>score</master_objective>
+    <master_rate>50</master_rate>
+  </config>
+  <meta>
+    <OBJECT_TYPE>1</OBJECT_TYPE>
+    <OBJECT_ID>531000000</OBJECT_ID>
+    <AUTHOR>Администратор</AUTHOR>
+    <VERSION>1.2 от  05.09.2011</VERSION>
+  </meta>
+  <section id="BBT-1-531000000" type="singleton">
+    <title>проверка</title>
+    <content id="BBT-1-531000000" objective_id="BBT.1.531000000" type="test">
+      <title>проверка</title>
+      <config>
+        <skip_questions>1</skip_questions>
+        <size_limit></size_limit>
+        <hints>0</hints>
+        <shuffle>1</shuffle>
+        <add_to_global_score>1</add_to_global_score>
+        <master_rate>50</master_rate>
+        <attempts>1</attempts>
+        <time_limit>120</time_limit>
+        <show_report>errors</show_report>
+        <immediate_response_when_correct>1</immediate_response_when_correct>
+        <immediate_response_when_wrong>1</immediate_response_when_wrong>
+      </config>
+      <testsection id="BBT-37-19416" objective_id="BBT.37.19416" type="">
+        <title>Математика</title>
+        <testquestion id="BBT-3-25942" type="" hint_href="slides\h25942.html">
+          <title><![CDATA[Сколько будет 2*2?]]></title>
+          <answer>1) 4</answer>
+          <answer>2) 5</answer>
+          <answer>3) 3</answer>
+          <answer>4) Сколько нужно</answer>
+          <mask>0</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25943" type="" hint_href="slides\h25943.html">
+          <title><![CDATA[Сколько программистов нужно, чтобы закрутить лампочку?]]></title>
+          <answer>1) 1</answer>
+          <answer>2) 2</answer>
+          <answer>3) 3</answer>
+          <answer>4) Ни одного</answer>
+          <answer>5) Один програмист и один IT-специалист</answer>
+          <mask>3</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25944" type="" hint_href="slides\h25944.html">
+          <title><![CDATA[Сколько лет длилась столетняя война?]]></title>
+          <answer>1) 100</answer>
+          <answer>2) 98</answer>
+          <answer>3) 116</answer>
+          <answer>4) 101</answer>
+          <mask>2</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25945" type="" hint_href="slides\h25945.html">
+          <title><![CDATA[Сколько месяцев в году имеют 28 дней?]]></title>
+          <answer>1) 0</answer>
+          <answer>2) 1</answer>
+          <answer>3) 3</answer>
+          <answer>4) 6</answer>
+          <answer>5) Все</answer>
+          <mask>4</mask>
+        </testquestion>
+      </testsection>
+      <testsection id="BBT-37-19417" objective_id="BBT.37.19417" type="">
+        <title>Логика</title>
+        <testquestion id="BBT-3-25946" type="" hint_href="slides\h25946.html">
+          <title><![CDATA[Какое колесо не крутится при правом развороте?]]></title>
+          <answer>1) Заднее правое</answer>
+          <answer>2) Заднее левое</answer>
+          <answer>3) Переднее правое</answer>
+          <answer>4) Переднее левое</answer>
+          <answer>5) Запасное</answer>
+          <mask>4</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25947" type="" hint_href="slides\h25947.html">
+          <title><![CDATA[Что нельзя съесть на завтрак?]]></title>
+          <answer>1) Котлету</answer>
+          <answer>2) Кашу</answer>
+          <answer>3) Обед</answer>
+          <answer>4) Суп</answer>
+          <answer>5) Ужин</answer>
+          <answer>6) Варианты 3) и 5)</answer>
+          <mask>5</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25948" type="" hint_href="slides\h25948.html">
+          <title><![CDATA[Можно ли прыгнуть выше девятиэтажки?]]></title>
+          <answer>1) Можно, но незачем</answer>
+          <answer>2) Нельзя</answer>
+          <answer>3) Не знаю</answer>
+          <mask>0</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25949" type="" hint_href="slides\h25949.html">
+          <title><![CDATA[Какой рукой лучше размешать чай?]]></title>
+          <answer>1) Правой</answer>
+          <answer>2) Левой</answer>
+          <answer>3) Хоть какой</answer>
+          <answer>4) Ложкой</answer>
+          <answer>5) А зачем его размешивать?</answer>
+          <mask>3</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25950" type="" hint_href="slides\h25950.html">
+          <title><![CDATA[Как спрыгнуть с десятиметровой лестницы и не ушибиться?]]></title>
+          <answer>1) Никак не прыгать</answer>
+          <answer>2) Надо прыгать с нижней ступени</answer>
+          <answer>3) Все равно ушибешься</answer>
+          <answer>4) Надо прыгать с аэропланом</answer>
+          <answer>5) Надо прыгать с парашютом</answer>
+          <answer>6) Варианты 4) и 5)</answer>
+          <mask>1</mask>
+        </testquestion>
+        <testquestion id="BBT-3-25951" type="" hint_href="slides\h25951.html">
+          <title><![CDATA[Как может брошенное яйцо пролететь три метра и не разбиться?]]></title>
+          <answer>1) Никак</answer>
+          <answer>2) Если на лету из него вылупится цыпленок</answer>
+          <answer>3) Нужно бросить яицо на четыре метра</answer>
+          <answer>4)  Если это яйцо уже стало курицей</answer>
+          <answer>5) Обернуть яйцо ватой</answer>
+          <mask>2</mask>
+        </testquestion>
+      </testsection>
+      <testsection id="BBT-37-19418" objective_id="BBT.37.19418" type="">
+        <title>География</title>
+        <testquestion id="BBT-3-25952" type="" hint_href="slides\h25952.html">
+          <title><![CDATA[Столица Мексики]]></title>
+          <answer>1) Монтеррей</answer>
+          <answer>2) Гвадалахара</answer>
+          <answer>3) Тихуана</answer>
+          <answer>4) Мехико</answer>
+          <mask>3</mask>
+        </testquestion>
+      </testsection>
+    </content>
+  </section>
+</module>

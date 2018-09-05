@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <title>Уно - минимальный тест</title>
+  <config>
+    <master_objective>score</master_objective>
+    <master_rate>50</master_rate>
+  </config>
+  <meta>
+    <OBJECT_TYPE>1</OBJECT_TYPE>
+    <OBJECT_ID>3196</OBJECT_ID>
+    <AUTHOR>Администратор</AUTHOR>
+    <VERSION>1.0 от  16.10.2017</VERSION>
+  </meta>
+  <section id="BBT-1-3196" type="singleton">
+    <title>Уно - минимальный тест</title>
+    <content id="BBT-1-3196" objective_id="BBT.1.3196" type="test">
+      <title>Уно - минимальный тест</title>
+      <config>
+        <skip_questions>1</skip_questions>
+        <size_limit></size_limit>
+        <hints>0</hints>
+        <shuffle>1</shuffle>
+        <add_to_global_score>1</add_to_global_score>
+        <master_rate>50</master_rate>
+        <attempts>1</attempts>
+        <time_limit>120</time_limit>
+        <show_report>errors</show_report>
+        <immediate_response_when_correct>1</immediate_response_when_correct>
+        <immediate_response_when_wrong>1</immediate_response_when_wrong>
+      </config>
+      <testsection id="BBT-37-30287" objective_id="BBT.37.30287" type="">
+        <title>Единственный раздел</title>
+        <testquestion id="BBT-3-30637" type="" hint_href="slides\h30637.html">
+          <title><![CDATA[Сколько лет длилась столетняя война?]]></title>
+          <answer>1) 116</answer>
+          <answer>2) 100</answer>
+          <answer>3) 78</answer>
+          <answer>4) 92</answer>
+          <mask>0</mask>
+        </testquestion>
+      </testsection>
+    </content>
+  </section>
+</module>
