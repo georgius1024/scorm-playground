@@ -2,9 +2,18 @@
  * Created by georgius on 06.09.18.
  */
 import axios from 'axios'
+import Scorm12Adapter from './scorm.1.2.adapter'
 // import get from 'lodash.get'
 const index = [
-  '532.1', '1.2019', '1.2549', 'ContentPackagingOneFilePerSCO_SCORM12'
+  '532.1',
+  '1.2019',
+  '1.2549',
+  'pi',
+  'pi-1',
+  'uno',
+  'uno-1',
+  '1000002477',
+  'ContentPackagingOneFilePerSCO_SCORM12'
 ]
 
 const getTitle = (node) => {
@@ -19,13 +28,16 @@ const getTitle = (node) => {
 const manifest = async (id) => {
   'use strict'
   const response = await axios.get('./static/scorm/' + id + '/imsmanifest.xml')
+
   // const parser = new DOMParser()
   const result = {}
   result.raw = response.data
 
   const parser = new DOMParser()
-  const xmlDoc = parser.parseFromString(response.data, 'text/xml')
+  let xmlDoc
+  xmlDoc = parser.parseFromString(response.data, 'text/xml')
   console.log(xmlDoc)
+
   const attributesToJson = (node) => {
     const result = {}
     if (node.attributes) {
@@ -36,7 +48,6 @@ const manifest = async (id) => {
     if (node['#text']) {
       result.text = node['#text'].trim()
     }
-
     return result
   }
 
@@ -107,7 +118,48 @@ const manifest = async (id) => {
   */
   return result
 }
-
+window.API = new Scorm12Adapter('scorm', '101', true, (data) => {
+  'use strict'
+  return data
+})
+/*
+window.API = {
+  LMSInitialize () {
+    'use strict'
+    console.log('LMSInitialize')
+    return "true"
+  },
+  LMSFinish () {
+    'use strict'
+    console.log('LMSFinish')
+    return "true"
+  },
+  LMSCommit () {
+    'use strict'
+    console.log('LMSCommit')
+    return "true"
+  },
+  LMSGetLastError () {
+    'use strict'
+    console.log('LMSGetLastError')
+    return 0
+  },
+  LMSGetValue () {
+    'use strict'
+    console.log('LMSGetValue')
+    return 0
+  },
+  LMSSetValue () {
+    'use strict'
+    console.log('LMSSetValue')
+    return 0
+  },
+  LMSGetErrorString () {
+    'use strict'
+    console.log('LMSGetErrorString')
+  }
+}
+*/
 export default {
   index,
   manifest

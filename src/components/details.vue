@@ -4,25 +4,20 @@
       <v-card class="elevation-4">
         <v-responsive>
           <v-toolbar color="teal" dark>
-            <v-toolbar-title>{{ title }}</v-toolbar-title>
+            <v-toolbar-title>Приступить</v-toolbar-title>
           </v-toolbar>
         </v-responsive>
+        <v-card-title>
+          <h3>{{title}} ({{id}})</h3>
+        </v-card-title>
         <v-card-text>
-          {{title}} ({{id}})
           <v-divider/>
           <v-list two-line>
             <v-list-tile
                 v-for="(item, index) in items"
                 :key="index"
-                avatar
                 @click=""
             >
-              <v-list-tile-avatar>
-                <v-icon>
-                  turned_in
-                </v-icon>
-              </v-list-tile-avatar>
-
               <v-list-tile-content>
                 <v-list-tile-title
                     v-html="item.title"
@@ -34,7 +29,15 @@
         </v-card-text>
         <v-card-actions>
           <v-btn
-              block
+              color="primary"
+              :to="{name: 'play', params: { id: id }}"
+          >
+            Приступить
+          </v-btn>
+          <v-spacer/>
+          <v-btn
+              right
+              flat
               :to="{name: 'root'}"
           >
             Назад
@@ -49,10 +52,10 @@
 <script type="text/babel">
   import Scorm from '@/scorm'
   export default {
-    name: 'root',
+    name: 'details',
     data () {
       return {
-        id: '',
+        id: '0',
         title: '',
         items: []
       }
@@ -71,7 +74,6 @@
         const s = await Scorm.manifest(id)
         this.title = s.organization.title
         this.items = s.organization.items
-        // console.log(s)
       }
     }
   }

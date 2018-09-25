@@ -17,7 +17,7 @@
             >
               <v-list-tile-avatar>
                 <v-icon>
-                  turned_in
+                  label_important
                 </v-icon>
               </v-list-tile-avatar>
 
