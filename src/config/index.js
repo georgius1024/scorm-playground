@@ -1,9 +1,9 @@
 let production = {
   DEBUG: false,
-  APP_NAME: 'Большие Банковские Тесты',
-  APP_ID: 'bbt-web',
+  APP_NAME: 'SCORM Playground',
+  APP_ID: 'scorm',
   API_URL: '/api/',
-  APP_VERSION: '5.0.0.0 pre',
+  APP_VERSION: '0.0.0.0',
   APP_COPYRIGHT: '© 1999, 2018 Агентство ВЭП'
 }
 

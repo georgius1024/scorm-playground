@@ -1,13 +1,17 @@
 <template>
   <v-app>
     <v-content>
-      <p>OLOLOLOLOLO!</p>
       <router-view/>
+    </v-content>
+    <!--
+    <v-content>
+      <p>OLOLOLOLOLO!</p>
       <v-btn @click="raiseMessage()" v-html="'message'"/>
       <v-btn @click="raiseError()" v-html="'error'"/>
       <v-btn @click="startSpinner" v-html="'Wait'"/>
       <v-btn @click="stopSpinner" v-html="'Cancel'"/>
     </v-content>
+    -->
     <app-footer />
     <app-message :message="message" :level="level" @closed="message=false"/>
     <app-spinner :active="spinner" :timeout="1000*60" @timeout="timedOut"/>
