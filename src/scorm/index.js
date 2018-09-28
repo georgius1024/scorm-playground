@@ -3,7 +3,7 @@
  */
 import axios from 'axios'
 import Scorm12Adapter from './scorm.1.2.adapter'
-// import get from 'lodash.get'
+import { getStored, putStored } from '../lib/session-storage'
 const index = [
   '532.1',
   '1.2019',
@@ -32,11 +32,11 @@ const manifest = async (id) => {
   // const parser = new DOMParser()
   const result = {}
   result.raw = response.data
+  result.id = id
 
   const parser = new DOMParser()
   let xmlDoc
   xmlDoc = parser.parseFromString(response.data, 'text/xml')
-  console.log(xmlDoc)
 
   const attributesToJson = (node) => {
     const result = {}
@@ -104,63 +104,95 @@ const manifest = async (id) => {
     }
     return org
   })
-
-  /*
-  manifest.data = parser.xml2js(response.data)
-  const root = get(manifest, 'data.elements.0.elements')
-  manifest.meta = root.find(e => e.name === 'metadata')
-  manifest.organizations = root.find(e => e.name === 'organizations')
-  manifest.resources = root.find(e => e.name === 'resources')
-  manifest.version = manifest.meta
-  get(manifest, 'data.elements.0.elements.0.elements.1.elements.0.text')
-  manifest.id = get(manifest, 'data.elements.0.attributes.identifier')
-  return manifest
-  */
   return result
 }
-window.API = new Scorm12Adapter('scorm', '101', true, (data) => {
-  'use strict'
-  return data
-})
-/*
-window.API = {
-  LMSInitialize () {
-    'use strict'
-    console.log('LMSInitialize')
-    return "true"
-  },
-  LMSFinish () {
-    'use strict'
-    console.log('LMSFinish')
-    return "true"
-  },
-  LMSCommit () {
-    'use strict'
-    console.log('LMSCommit')
-    return "true"
-  },
-  LMSGetLastError () {
-    'use strict'
-    console.log('LMSGetLastError')
-    return 0
-  },
-  LMSGetValue () {
-    'use strict'
-    console.log('LMSGetValue')
-    return 0
-  },
-  LMSSetValue () {
-    'use strict'
-    console.log('LMSSetValue')
-    return 0
-  },
-  LMSGetErrorString () {
-    'use strict'
-    console.log('LMSGetErrorString')
+
+const initializeSession = async (manifest, session, onCompleted) => {
+  function initSessionData (session) {
+    const newSessionData = {}
+    newSessionData['cmi.core.session_time'] = '0000:00:00.00'
+
+    newSessionData['cmi.core.lesson_status'] = 'not attempted'
+    newSessionData['cmi.core.entry'] = 'ab-initio'
+    newSessionData['cmi.core.credit'] = 'credit'
+    newSessionData['cmi.core.lesson_mode'] = 'normal'
+
+    newSessionData['cmi.core.student_id'] = '101'
+    newSessionData['cmi.core.student_name'] = 'SCORM User'
+
+    newSessionData['cmi.core.total_time'] = '0000:00:00'
+
+    newSessionData['cmi.core.lesson_location'] = ''
+    newSessionData['cmi.suspend_data'] = ''
+    newSessionData['cmi.launch_data'] = ''
+    putStored(session, newSessionData)
+    return newSessionData
   }
+
+  window.API = new Scorm12Adapter(manifest.id, session, true, (obj, session, action, changes) => {
+    const oldSessionData = getStored(session)
+    let newSessionData = Object.assign({}, oldSessionData, changes)
+    switch (action) {
+      case 'initialize':
+        newSessionData = initSessionData(session)
+        break
+      case 'finalize':
+        /// Вычисление cmi.core.total_time
+        let time = newSessionData['cmi.core.session_time'].split(':')
+        let sessionTime = time[0] * 3600 + time[1] * 60 + time[2]
+        time = newSessionData['cmi.core.total_time'].split(':')
+        let totalTime = time[0] * 3600 + time[1] * 60 + time[2]
+        totalTime += sessionTime
+
+        let h = Math.floor(totalTime / 3600)
+        let s = totalTime % 60
+        let m = Math.floor((totalTime % 3600) / 60)
+        if (h < 10) {
+          h = '0' + h
+        }
+        if (s < 10) {
+          s = '0' + s
+        }
+        if (m < 10) {
+          m = '0' + m
+        }
+        newSessionData['cmi.core.total_time'] = [h, m, s].join(':')
+        newSessionData['cmi.core.session_time'] = '0000:00:00.00'
+        if (newSessionData['cmi.core.lesson_status'] === 'not attempted') {
+          newSessionData['cmi.core.lesson_status'] = 'incomplete'
+        }
+        /// Если есть score и установлено правило для masteryscore, идет сравнение
+        if (newSessionData['adlcp:masteryscore'] && newSessionData['cmi.core.score.raw']) {
+          if (newSessionData['cmi.core.score.raw'] >= newSessionData['adlcp:masteryscore']) {
+            newSessionData['cmi.core.lesson_status'] = 'passed'
+          } else {
+            newSessionData['cmi.core.lesson_status'] = 'failed'
+          }
+        }
+        if (newSessionData['cmi.core.exit'] !== 'suspend') { /// Не требуется сохранять итоги
+          newSessionData['cmi.core.lesson_location'] = ''
+          newSessionData['cmi.suspend_data'] = ''
+        }
+        if (
+          (newSessionData['cmi.core.lesson_status'] === 'passed') ||
+          (newSessionData['cmi.core.lesson_status'] === 'failed') ||
+          (newSessionData['cmi.core.lesson_status'] === 'completed')) {
+          newSessionData['LMS.closed'] = true
+        }
+
+        if (onCompleted) {
+          onCompleted(newSessionData)
+        }
+
+        break
+    }
+    putStored(session, newSessionData)
+    return newSessionData
+  })
 }
-*/
+
 export default {
   index,
+  initializeSession,
   manifest
 }
