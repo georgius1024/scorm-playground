@@ -129,7 +129,7 @@ const initializeSession = async (manifest, session, onCompleted) => {
     return newSessionData
   }
 
-  window.API = new Scorm12Adapter(manifest.id, session, true, (obj, session, action, changes) => {
+  window.API = new Scorm12Adapter(manifest.id, session, false, (obj, session, action, changes) => {
     const oldSessionData = getStored(session)
     let newSessionData = Object.assign({}, oldSessionData, changes)
     switch (action) {
