@@ -8,7 +8,7 @@
           </v-toolbar-title>
 
           <v-spacer/>
-          {{slideNo + 1}} / {{validSlides}}
+          {{slideNo + 1}} / {{items.length}}
           {{status}}
           <v-toolbar-items>
             <v-btn flat @click="restart">
@@ -31,7 +31,7 @@
                 chevron_right
               </v-icon>
             </v-btn>
-            <v-btn flat @click="selectLastSlide":disabled="slideNo === lastSlideIndex">
+            <v-btn flat @click="selectLastSlide" :disabled="slideNo === lastSlideIndex">
               <v-icon>
                 last_page
               </v-icon>
@@ -57,7 +57,7 @@
     width: 100%;
     /*height: 1280px;*/
     height: calc(100% - 65px);
-    background-color: red;
+    padding: 8px 0;
   }
 </style>
 <script type="text/babel">
@@ -81,19 +81,16 @@
         return this.items[this.slideNo]
       },
       firstSlideIndex () {
-        return this.items.findIndex(e => e.url)
+        return 0
       },
       lastSlideIndex () {
-        return this.items.length - this.items.slice().reverse().findIndex(e => e.url)
+        return this.items.length - 1
       },
       nextSlideIndex () {
-        return this.items.findIndex((e, idx) => e.url && idx > this.slideNo)
+        return this.slideNo + 1 <= this.lastSlideIndex ? this.slideNo + 1 : -1
       },
       prevSlideIndex () {
-        return this.items.slice().reverse().findIndex((e, idx) => e.url && (this.items.length - idx) < this.slideNo)
-      },
-      validSlides () {
-        return this.items.reduce((sum, e) => sum += e.url ? 1 : 0, 0)
+        return this.slideNo >= this.firstSlideIndex ? this.slideNo - 1 : -1
       }
     },
     mounted () {
@@ -133,7 +130,7 @@
         this.id = id
         this.manifest = await Scorm.manifest(id)
         this.title = this.manifest.organization.title
-        this.items = this.manifest.organization.items
+        this.items = this.manifest.organization.items.filter(e => e.url)
         this.restart()
       }
     }
